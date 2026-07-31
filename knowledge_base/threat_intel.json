@@ -1,0 +1,232 @@
+{
+    "version": "1.0",
+    "description": "MITRE ATT&CK techniques and common attack signatures for IDS threat intelligence",
+    "source": "MITRE ATT&CK Framework v14 — Curated subset for network-based IDS",
+    "techniques": [
+        {
+            "id": "T1046",
+            "name": "Network Service Scanning",
+            "tactic": "Discovery",
+            "severity": "Medium",
+            "description": "Adversaries may attempt to get a listing of services running on remote hosts and local network infrastructure devices, including those that may be vulnerable to remote software exploitation. Common methods include port scanning using tools like Nmap, masscan, or custom scripts that send SYN packets to a range of ports.",
+            "detection": "Monitor for unusual SYN packets to multiple ports on single or multiple hosts within a short time window. Look for sequential or randomized port scanning patterns from a single source IP.",
+            "keywords": ["port scan", "SYN scan", "service discovery", "nmap", "masscan", "reconnaissance", "port sweep"]
+        },
+        {
+            "id": "T1498",
+            "name": "Network Denial of Service",
+            "tactic": "Impact",
+            "severity": "High",
+            "description": "Adversaries may perform Network Denial of Service (DoS) attacks to degrade or block the availability of targeted resources. This includes volumetric attacks (ICMP floods, UDP floods, SYN floods) that overwhelm network bandwidth or system resources.",
+            "detection": "Monitor for high volumes of traffic from single sources, unusual ICMP traffic patterns, and SYN packets without corresponding ACK responses. Rate-based detection is essential.",
+            "keywords": ["DDoS", "DoS", "flood", "SYN flood", "ICMP flood", "UDP flood", "volumetric attack", "bandwidth exhaustion"]
+        },
+        {
+            "id": "T1498.001",
+            "name": "Direct Network Flood",
+            "tactic": "Impact",
+            "severity": "High",
+            "description": "Adversaries may attempt to cause a denial of service by directly sending a high-volume of network traffic to a target. This type of flooding commonly involves ICMP and UDP protocols. The goal is to saturate the target's network interface or exhaust system resources.",
+            "detection": "Detection of high-rate ICMP or UDP traffic from a single source exceeding baseline thresholds. Monitor for traffic patterns that don't match normal communication profiles.",
+            "keywords": ["ICMP flood", "ping flood", "UDP flood", "direct flood", "high frequency", "traffic spike"]
+        },
+        {
+            "id": "T1499",
+            "name": "Endpoint Denial of Service",
+            "tactic": "Impact",
+            "severity": "High",
+            "description": "Adversaries may perform Endpoint Denial of Service (DoS) attacks to degrade or block services running on targeted hosts. This can target specific applications or exhaust operating system resources like CPU, memory, or network socket connections.",
+            "detection": "Monitor for a large number of connection attempts to a single service port from one or more sources. Look for incomplete TCP handshakes and resource exhaustion patterns.",
+            "keywords": ["endpoint DoS", "service degradation", "connection exhaustion", "resource exhaustion", "application layer DoS"]
+        },
+        {
+            "id": "T1571",
+            "name": "Non-Standard Port",
+            "tactic": "Command and Control",
+            "severity": "Medium",
+            "description": "Adversaries may communicate using a protocol and port pairing that are typically not associated. For example, HTTPS over port 8088 or HTTP over port 4444. By using non-standard ports, adversaries can bypass filtering and detection based on standard port-protocol associations.",
+            "detection": "Monitor for network connections to uncommon port numbers, especially those associated with known malware (4444, 5555, 31337). Analyze the protocol used versus the expected protocol for the port.",
+            "keywords": ["non-standard port", "suspicious port", "unusual port", "C2 communication", "backdoor port", "4444", "5555", "31337"]
+        },
+        {
+            "id": "T1572",
+            "name": "Protocol Tunneling",
+            "tactic": "Command and Control",
+            "severity": "High",
+            "description": "Adversaries may tunnel network communications to and from a victim system within a separate protocol to avoid detection. Tunneling involves encapsulating one protocol within another, such as tunneling data through DNS queries and responses or ICMP packets.",
+            "detection": "Analyze DNS query sizes — legitimate DNS queries are typically under 512 bytes. Large DNS packets or high-frequency DNS queries to unusual domains may indicate tunneling. Also monitor for ICMP packets with unusually large payloads.",
+            "keywords": ["DNS tunneling", "protocol tunneling", "DNS exfiltration", "ICMP tunneling", "covert channel", "data exfiltration"]
+        },
+        {
+            "id": "T1595",
+            "name": "Active Scanning",
+            "tactic": "Reconnaissance",
+            "severity": "Medium",
+            "description": "Adversaries may execute active reconnaissance scans to gather information for targeting. Active scans are those where the adversary probes infrastructure via network traffic, as opposed to passive methods. This includes scanning IP blocks, ports, and vulnerabilities.",
+            "detection": "Monitor for connection attempts to many different ports and hosts. SYN packets without subsequent connections, ICMP sweeps, and systematic probing patterns are indicators.",
+            "keywords": ["active scanning", "reconnaissance", "port scanning", "vulnerability scanning", "network probing", "host discovery"]
+        },
+        {
+            "id": "T1595.001",
+            "name": "Scanning IP Blocks",
+            "tactic": "Reconnaissance",
+            "severity": "Medium",
+            "description": "Adversaries may scan victim IP blocks to gather information about network topology, active hosts, and running services. This typically involves sending ICMP echo requests (ping sweep) or TCP SYN packets to ranges of IP addresses.",
+            "detection": "Detect sequential or systematic connection attempts across IP address ranges from a single source. ICMP echo requests to multiple hosts in a subnet within a short timeframe indicate host discovery.",
+            "keywords": ["IP scanning", "ping sweep", "host discovery", "subnet scanning", "ICMP sweep", "network mapping"]
+        },
+        {
+            "id": "T1190",
+            "name": "Exploit Public-Facing Application",
+            "tactic": "Initial Access",
+            "severity": "Critical",
+            "description": "Adversaries may attempt to exploit a weakness in an Internet-facing host or process using software exploits. Common targets include web servers, database servers, and email servers that process untrusted input.",
+            "detection": "Monitor for unusual payload sizes or content targeting known ports (80, 443, 8080, 1433, 3306). Large payloads to database ports may indicate SQL injection attempts. Anomalous HTTP request patterns may indicate web application attacks.",
+            "keywords": ["exploit", "SQL injection", "web attack", "application exploit", "RCE", "remote code execution", "payload", "buffer overflow"]
+        },
+        {
+            "id": "T1048",
+            "name": "Exfiltration Over Alternative Protocol",
+            "tactic": "Exfiltration",
+            "severity": "Critical",
+            "description": "Adversaries may steal data by exfiltrating it over a different protocol than that of the existing command and control channel. The data may be sent to an alternate network location from the main command and control server. DNS tunneling is a common method for covert data exfiltration.",
+            "detection": "Monitor for unusually large DNS responses, high-frequency DNS queries to specific domains, and DNS query names with encoded data patterns (long subdomain strings, base64-like patterns).",
+            "keywords": ["data exfiltration", "DNS exfiltration", "covert exfiltration", "alternative protocol", "DNS tunneling", "data theft"]
+        },
+        {
+            "id": "T1040",
+            "name": "Network Sniffing",
+            "tactic": "Credential Access",
+            "severity": "Medium",
+            "description": "Adversaries may sniff network traffic to capture information about an environment, including authentication material passed over the network. This may include capturing credentials, sensitive data, or understanding network topology.",
+            "detection": "Monitor for interfaces being placed in promiscuous mode. ARP anomalies and unexpected broadcast traffic may indicate sniffing activity or ARP spoofing for man-in-the-middle attacks.",
+            "keywords": ["network sniffing", "packet capture", "credential theft", "promiscuous mode", "ARP spoofing", "MITM", "wiretapping"]
+        },
+        {
+            "id": "T1095",
+            "name": "Non-Application Layer Protocol",
+            "tactic": "Command and Control",
+            "severity": "Medium",
+            "description": "Adversaries may use an OSI non-application layer protocol for communication between host and C2 server or among infected hosts within a network. These protocols include ICMP, UDP, or raw sockets. By operating below the application layer, these communications may bypass standard application-layer inspection.",
+            "detection": "Monitor for abnormal ICMP traffic patterns, such as large ICMP payloads or high-frequency ICMP communications. Analyze UDP traffic to unusual destinations or on unusual ports.",
+            "keywords": ["ICMP C2", "raw socket", "non-application protocol", "covert channel", "ICMP tunnel", "UDP C2"]
+        },
+        {
+            "id": "T1021.002",
+            "name": "Remote Services: SMB/Windows Admin Shares",
+            "tactic": "Lateral Movement",
+            "severity": "High",
+            "description": "Adversaries may use SMB (Server Message Block) to interact with or move laterally to other systems in the network. SMB is commonly used for file sharing and remote administration in Windows environments, running on TCP port 445.",
+            "detection": "Monitor for unexpected connections to port 445, especially from external or unusual source IPs. Multiple failed SMB authentication attempts may indicate brute force attacks. Watch for lateral movement patterns where one internal host connects to many others via SMB.",
+            "keywords": ["SMB", "port 445", "Windows shares", "lateral movement", "EternalBlue", "WannaCry", "file sharing exploit"]
+        },
+        {
+            "id": "T1133",
+            "name": "External Remote Services",
+            "tactic": "Persistence",
+            "severity": "High",
+            "description": "Adversaries may leverage external-facing remote services to initially access or persist within a network. Remote services such as RDP (port 3389), SSH, VPNs, and Citrix allow users to connect to internal resources from external locations.",
+            "detection": "Monitor for connections to remote service ports (3389, 22, 443) from unusual source IPs or geographies. Brute force patterns (multiple failed logins) and connections outside business hours are suspicious indicators.",
+            "keywords": ["RDP", "remote desktop", "port 3389", "SSH", "remote access", "brute force", "external access"]
+        },
+        {
+            "id": "T1110",
+            "name": "Brute Force",
+            "tactic": "Credential Access",
+            "severity": "High",
+            "description": "Adversaries may use brute force techniques to attempt to gain access to accounts when passwords are unknown or when password hashes are obtained. High-frequency connection attempts to authentication services (SSH, RDP, HTTP login) from a single source indicate brute force activity.",
+            "detection": "Monitor for high-frequency connection attempts to service ports associated with authentication (22, 3389, 80/443, 1433). Rapid reconnection patterns and failed authentication responses are key indicators.",
+            "keywords": ["brute force", "password guessing", "credential stuffing", "login attempts", "authentication attack", "dictionary attack"]
+        },
+        {
+            "id": "T1018",
+            "name": "Remote System Discovery",
+            "tactic": "Discovery",
+            "severity": "Low",
+            "description": "Adversaries may attempt to get a listing of other systems by IP address, hostname, or other logical identifier on a network that may be used for lateral movement. This includes ARP scanning, DNS enumeration, and ICMP host discovery.",
+            "detection": "Monitor for ARP requests to sequential IP addresses, ICMP echo requests to multiple hosts, and DNS queries for internal hostnames. These activities are normal in small volumes but suspicious at high rates.",
+            "keywords": ["host discovery", "ARP scan", "DNS enumeration", "network discovery", "ping sweep", "internal reconnaissance"]
+        },
+        {
+            "id": "T1219",
+            "name": "Remote Access Software",
+            "tactic": "Command and Control",
+            "severity": "Medium",
+            "description": "An adversary may use legitimate desktop support and remote access software (such as TeamViewer, AnyDesk, or remote shells) to establish an interactive command and control channel. These tools often operate on non-standard ports.",
+            "detection": "Monitor for outbound connections on ports commonly used by remote access tools. Unusual long-duration connections to external IPs on non-standard ports may indicate unauthorized remote access tool usage.",
+            "keywords": ["remote access tool", "RAT", "TeamViewer", "AnyDesk", "reverse shell", "C2 tool", "remote control"]
+        },
+        {
+            "id": "T1071.004",
+            "name": "Application Layer Protocol: DNS",
+            "tactic": "Command and Control",
+            "severity": "High",
+            "description": "Adversaries may communicate using the Domain Name System (DNS) application layer protocol to avoid detection. Commands to the remote system and results from the remote system are embedded within the protocol traffic. DNS is commonly used for tunneling because it is rarely blocked at the network perimeter.",
+            "detection": "Detect anomalous DNS query patterns: unusually long domain names (potential encoded data), high query rates to single domains, and DNS responses with abnormally large TXT records. Statistical analysis of DNS query entropy can reveal tunneling.",
+            "keywords": ["DNS C2", "DNS command and control", "DNS tunneling", "encoded DNS", "DNS covert channel", "TXT record abuse"]
+        },
+        {
+            "id": "T1205",
+            "name": "Traffic Signaling",
+            "tactic": "Defense Evasion",
+            "severity": "High",
+            "description": "Adversaries may use traffic signaling to hide open ports or trigger special actions on a system. Port knocking is a well-known method where a series of connection attempts to closed ports in a specific sequence signals the system to open an actual service port.",
+            "detection": "Monitor for connection attempts to multiple closed ports in rapid succession from the same source. Specific sequences of port access attempts may indicate port knocking patterns.",
+            "keywords": ["port knocking", "traffic signaling", "hidden port", "defense evasion", "covert activation"]
+        },
+        {
+            "id": "T1557",
+            "name": "Adversary-in-the-Middle",
+            "tactic": "Credential Access",
+            "severity": "Critical",
+            "description": "Adversaries may attempt to position themselves between two or more networked devices using ARP spoofing, DNS spoofing, or other MITM techniques to intercept, modify, or inject traffic. This enables credential theft, session hijacking, and data manipulation.",
+            "detection": "Monitor for ARP table changes, duplicate IP addresses, and ARP storms. DNS response anomalies (different answers for same query) may indicate DNS spoofing. TLS certificate mismatches indicate potential SSL stripping.",
+            "keywords": ["MITM", "man-in-the-middle", "ARP spoofing", "DNS spoofing", "session hijacking", "SSL stripping", "interception"]
+        },
+        {
+            "id": "T1542",
+            "name": "Pre-OS Boot",
+            "tactic": "Defense Evasion",
+            "severity": "Critical",
+            "description": "Adversaries may abuse pre-OS boot mechanisms as a way to establish persistence on a system. During the booting process, firmware and various startup services are loaded before the operating system. These programs may be exploited to maintain persistence.",
+            "detection": "Network indicators include unusual TFTP or PXE boot traffic, unexpected firmware download connections, and connections to known malicious update servers.",
+            "keywords": ["boot exploit", "firmware", "TFTP", "PXE boot", "bootkit", "persistence"]
+        },
+        {
+            "id": "T1071.001",
+            "name": "Application Layer Protocol: Web Protocols",
+            "tactic": "Command and Control",
+            "severity": "Medium",
+            "description": "Adversaries may communicate using application layer protocols associated with web traffic to avoid detection. HTTP and HTTPS are commonly used for C2 because they blend in with legitimate web browsing. Malware may beacon to C2 servers using HTTP POST requests with encoded payloads.",
+            "detection": "Monitor for regular, periodic HTTP/HTTPS connections to unusual domains. Beaconing patterns (fixed-interval connections) and large POST payloads to non-content-delivery sites are suspicious. User-agent string anomalies may also indicate C2 traffic.",
+            "keywords": ["HTTP C2", "HTTPS C2", "web beacon", "C2 beacon", "web protocol abuse", "POST beacon", "user-agent anomaly"]
+        },
+        {
+            "id": "T1590",
+            "name": "Gather Victim Network Information",
+            "tactic": "Reconnaissance",
+            "severity": "Low",
+            "description": "Adversaries may gather information about the victim's network that can be used during targeting. This includes network topology, IP ranges, domain registration data, DNS records, and network service configurations.",
+            "detection": "External reconnaissance is difficult to detect from internal sensors. However, aggressive internal reconnaissance after initial access produces detectable patterns: systematic DNS queries, SNMP enumeration, and traceroute sequences.",
+            "keywords": ["network enumeration", "topology mapping", "DNS recon", "SNMP scan", "network information gathering"]
+        },
+        {
+            "id": "T1059",
+            "name": "Command and Scripting Interpreter",
+            "tactic": "Execution",
+            "severity": "High",
+            "description": "Adversaries may abuse command and script interpreters to execute commands, scripts, or binaries. Common interpreters include PowerShell, cmd.exe, Bash, and Python. Network indicators include reverse shell connections and web shell communications.",
+            "detection": "Monitor for reverse shell indicators: outbound connections on suspicious ports (4444, 5555) with interactive traffic patterns. Web shell traffic shows HTTP requests with command-like parameters to unusual web paths.",
+            "keywords": ["reverse shell", "web shell", "command execution", "script execution", "PowerShell", "backdoor shell"]
+        },
+        {
+            "id": "T1583.006",
+            "name": "Acquire Infrastructure: Web Services",
+            "tactic": "Resource Development",
+            "severity": "Low",
+            "description": "Adversaries may use web services (such as cloud storage, paste sites, or social media) for C2 communication, staging malware, or data exfiltration. These services are rarely blocked and blend in with normal traffic.",
+            "detection": "Monitor for high-volume connections to known paste sites, file sharing services, or cloud storage APIs that deviate from normal organizational usage patterns.",
+            "keywords": ["cloud C2", "paste site", "file sharing abuse", "web service abuse", "staging infrastructure"]
+        }
+    ]
+}
