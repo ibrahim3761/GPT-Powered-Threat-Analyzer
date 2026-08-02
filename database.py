@@ -1,6 +1,6 @@
 """
 ==============================================================================
- LLM-Powered Intrusion Detection System (IDS) — Database Module
+ GPT-Powered Threat Analyzer (GPTA) — Database Module
 ==============================================================================
  University Capstone Project — Tier S
  
