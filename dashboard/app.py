@@ -364,7 +364,6 @@ def main():
             index=available_interfaces.index(current_interface) if current_interface in available_interfaces else 0
         )
 
-        st.caption(f"API_BASE: {API_BASE}")
 
         # Start/Stop toggle
         st.divider()
