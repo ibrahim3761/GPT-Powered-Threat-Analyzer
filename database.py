@@ -2,7 +2,6 @@
 ==============================================================================
  GPT-Powered Threat Analyzer (GPTA) — Database Module
 ==============================================================================
- University Capstone Project — Tier S
  
  SQLite persistence layer using aiosqlite for async database operations.
  Manages alerts, capture sessions, and aggregated statistics.

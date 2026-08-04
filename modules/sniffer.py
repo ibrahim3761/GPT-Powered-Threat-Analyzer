@@ -2,7 +2,6 @@
 ==============================================================================
  GPT-Powered Threat Analyzer — Packet Sniffer Module
 ==============================================================================
- University Capstone Project — Tier S
  
  Module 1: Network Packet Capture using Scapy's AsyncSniffer.
  

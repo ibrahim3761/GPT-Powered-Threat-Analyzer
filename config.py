@@ -2,7 +2,6 @@
 ==============================================================================
  GPT-Powered Threat Analyzer — Configuration Module
 ==============================================================================
- University Capstone Project — Tier S
  
  Centralized configuration management using Pydantic BaseSettings.
  All environment variables are loaded from .env with sensible defaults.
