@@ -2,7 +2,6 @@
 ==============================================================================
  GPT-Powered Threat Analyzer — Streamlit Dashboard
 ==============================================================================
- University Capstone Project — Tier S
 
  Premium SOC (Security Operations Center) Dashboard with:
    - Real-time system status indicators
@@ -299,7 +298,6 @@ def main():
     st.markdown("""
     <div class="main-header">
         <h1>🛡️ GPT-Powered Threat Analyzer</h1>
-        <p>Real-Time AI Threat Analysis • Tier S Capstone Project</p>
     </div>
     """, unsafe_allow_html=True)
 

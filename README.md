@@ -1,6 +1,5 @@
 # 🛡️ GPT-Powered Threat Analyzer
 
-> **University Capstone Project — Tier S**  
 > A production-grade Intrusion Detection System that captures live network packets, applies heuristic triage rules, and uses GPT OSS 120B to classify and explain threats in natural language.
 
 ---

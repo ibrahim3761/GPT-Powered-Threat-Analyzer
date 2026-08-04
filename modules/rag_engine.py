@@ -2,7 +2,6 @@
 ==============================================================================
  GPT-Powered Threat Analyzer — RAG Knowledge Base
 ==============================================================================
- University Capstone Project — Tier S
  
  Bonus Feature: Retrieval-Augmented Generation (RAG) for threat intelligence.
  

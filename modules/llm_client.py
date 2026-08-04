@@ -2,7 +2,6 @@
 ==============================================================================
  GPT-Powered Threat Analyzer — LLM Client Module
 ==============================================================================
- University Capstone Project — Tier S
  
  Module 2: Groq Cloud API integration for AI-powered threat analysis.
  

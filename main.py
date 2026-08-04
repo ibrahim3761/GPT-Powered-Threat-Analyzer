@@ -2,7 +2,6 @@
 ==============================================================================
  GPT-Powered Threat Analyzer — FastAPI Main Application
 ==============================================================================
- University Capstone Project — Tier S
  
  Module 3: FastAPI REST API and application orchestration.
  
@@ -154,7 +153,7 @@ app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
     description=(
-        "Tier S GPT-Powered Threat Analyzer. "
+        "GPT-Powered Threat Analyzer. "
         "Captures network packets, applies heuristic triage, and uses "
         "Groq Cloud for AI-powered threat analysis."
     ),

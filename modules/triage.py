@@ -2,7 +2,6 @@
 ==============================================================================
  GPT-Powered Threat Analyzer — Heuristic Triage Engine
 ==============================================================================
- University Capstone Project — Tier S
  
  Module 1b: Fast heuristic rule engine that pre-filters captured packets.
  
